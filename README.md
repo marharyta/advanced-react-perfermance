@@ -2,10 +2,12 @@
 
 This is the source code for an advanced React Performance workshop. It was designed by [Sara Vieira](https://github.com/SaraVieira), [Sia Karamalegos](https://github.com/siakaramalegos), and [Jason Lengstorf](https://github.com/jlengstorf).
 
-- [Abstract](#abstract)
-- [Prerequisites](#prerequisites)
-- [About the trainers](#about-the-trainers)
-- [Slides and controls](#slides-and-controls)
+- [Advanced Performance Tuning for React Applications](#advanced-performance-tuning-for-react-applications)
+  - [Abstract](#abstract)
+  - [Prerequisites](#prerequisites)
+  - [About the trainers](#about-the-trainers)
+  - [Slides and Controls](#slides-and-controls)
+  - [Resources](#resources)
 
 ## Abstract
 Getting performance right is hard, even when you have the luxury of starting an app from scratch. It's even harder when you need to improve the performance of existing apps, as is so often the case. In this workshop, Sia Karamalegos, Sara Vieira, and Jason Lengstorf will lead you through the process of:
@@ -18,6 +20,7 @@ Getting performance right is hard, even when you have the luxury of starting an 
 During this full-day workshop, you’ll learn advanced techniques for improving the performance of React apps, including:
 
 - Lazy loading resources & components with React.lazy and Suspense
+- // Suspense wont work with SSR
 - Leveraging service workers for performance
 - Seamlessly preloading and prefetching assets
 - Automatically optimizing images

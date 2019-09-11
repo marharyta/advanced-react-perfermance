@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { navigate } from '@reach/router';
 import uuid from 'uuid/v4';
 import slugify from 'slugify';
@@ -7,7 +7,11 @@ import { useShamecaps } from '../../context/shamecaps';
 import { LANGUAGES, TYPES } from '../../constants';
 import Layout from '../layout/layout';
 import Select from '../select/select';
-import CodeMirror from './codemirror';
+// import CodeMirror from './codemirror';
+
+const CodeMirror = lazy(() =>
+  import('./codemirror' /* webpackChunkName: "code-mirror" */)
+);
 
 import './add.scss';
 
@@ -21,6 +25,26 @@ const Add = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+
+    const [prettierCode, setPrettierCode] = useState('');
+    Promise.all([
+      import('prettier/standalone' /* webpackChunkName: "prettier" */),
+      import('prettier/parser-graphql' /* webpackChunkName: "prettier-parser-graphql"  */),
+      import('prettier/parser-babylon' /* webpackChunkName: "prettier-parser-babylon"  */),
+      import('prettier/parser-markdown' /* webpackChunkName:  "prettier-parser-markdown" */)
+    ]).then(([prettier, ...plugins]) => {
+      let prettierCode;
+      try {
+        setPrettierCode(
+          prettier.format(code, {
+            parser: language === 'javascript' ? 'babel' : language,
+            plugins
+          })
+        );
+      } catch {
+        setPrettierCode(code);
+      }
+    });
 
     const data = {
       id: uuid(),
@@ -64,7 +88,10 @@ const Add = () => {
             />
           </div>
         </fieldset>
-        <CodeMirror onChange={c => setCode(c)} />
+        <Suspense fallback={<p>oppps</p>}>
+          <CodeMirror onChange={c => setPrettierCode(c)} />
+        </Suspense>
+
         <button type="submit" className="submit-button">
           Share Your Shame
         </button>

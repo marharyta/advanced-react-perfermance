@@ -5,9 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>shame.dev</title>
+    <!--
+      you can preload a resourse
+      like gstatic with google fonts
+
+      do not put hashes on te fonts in webpack
+
+      thee is 
+      https://www.npmjs.com/package/subfont
+
+      this can be used to analyze your file to see what you need
+    -->
+    <!-- <link rel="preload" as="font" type="font/woff2" href="/" crossorigin /> -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="./roboto-mono-v6-latin-italic.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="./roboto-mono-v6-latin-regular.woff2"
+      crossorigin
+    />
+    <link />
   </head>
   <body>
     <noscript>This site only works with JavaScript enabled. :(</noscript>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./service-worker.js');
+          // service worker
+        });
+      }
+    </script>
   </body>
 </html>

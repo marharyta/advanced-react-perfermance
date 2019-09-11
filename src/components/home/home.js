@@ -12,7 +12,7 @@ const Home = ({ location }) => {
     shamecaps,
     limit,
     loadMoreShamecaps,
-    totalCount,
+    totalCount
   } = useShamecaps();
 
   if (loading) {
